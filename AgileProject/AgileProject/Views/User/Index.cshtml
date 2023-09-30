@@ -1,0 +1,225 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AgileProject.Entidades
+@*@inject SignInManager<AspNetUsers> SignInManager*@
+@*@inject UserManager<AspNetUsers> UserManager*@
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+
+@if (ViewBag.IsSignedIn)
+{
+
+    <h1>Manage your account</h1>
+
+    <div>
+        <h2>Complete your information</h2>
+        <hr />
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item"><a class="nav-link active" id="profile" href="/Home">My Information</a></li>
+
+                </ul>
+
+            </div>
+            <form id="profile-form" asp-controller="User" asp-action="Save" method="post">
+                <div class="col-md-9">
+
+                    <div class="row">
+                        <div class="col-md-8">
+
+                            <h3>Profile</h3>
+                            <div class="form-floating" style="display: none;">
+                                <input class="form-control" type="text" id="Id" name="Id" value="@Model.Id" />
+                                <label class="form-label" for="Id">Id</label>
+                            </div>
+                            <div class="form-floating" style="display:none;">
+                                <input class="form-control" type="text" id="UserName" name="UserName" value="@ViewBag.UserName" />
+                                <label class="form-label" for="UserName">Username</label>
+                            </div>
+                            <div class="form-floating">
+                                <input class="form-control" type="date" data-val="true" id="FechaNacimiento" name="FechaNacimiento" value="@Model.FechaNacimientoStr" />
+                                <label class="form-label" for="FechaNacimiento">Birthday</label>
+
+                                <span id="requiredBirthday" style="display:none" class="text-danger field-validation-error" data-valmsg-for="FechaNacimiento" data-valmsg-replace="true">
+                                    <span id="requiredBirthday-error" class="">The Current birthday field is required.</span>
+                                </span>
+                            </div>
+
+
+                            <partial name="_UserOrganization" />
+
+
+                            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+                            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8DsfhTB1faNAgHLDIY0x9vl4T5NT40_LZbcUT6QliFP4TuKlxintAI8UvfkKk8RyDY09yksaWBfHRFlgw7y4htrpexW2KwZK826pwuYJ9lkSKK1Hlhkj-2pPs8m-TtFDxhVBXWeWYjec13SaVMJhVUzjFq7G4o0BrViqBnsk-Lvs4CGJampER3fwMZbZK408IQ" />
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+}
+else
+{
+    <partial name="_LoginRegisterPartial" />
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+    //var element = document.getElementById("TeamsListStr");
+    //console.log(element.value);
+
+    var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+    //console.log(model);
+
+
+    inicio();
+
+    function inicio() {
+        selectElement()
+        evalCheckOpcion();
+
+    }
+
+
+    function selectElement() {
+
+        var element = document.getElementById("Role");
+        element.value = model.role;
+    }
+
+    function evalCheckOpcion(id) {
+        var tableBody = document.getElementById('divTeamsList');
+        if (!isNullOrEmpty(tableBody)) {
+
+            var miscasillas = tableBody.getElementsByTagName('input');
+            var contCheck = 0;
+            var listaTorneosvalues = [];
+
+            for (i = 0; i < miscasillas.length; i++) {
+                if (miscasillas[i].type == "checkbox") {
+                    //console.log(miscasillas[i].checked, miscasillas[i].value, id)
+
+                    if (miscasillas[i].checked) {
+                        listaTorneosvalues.push(miscasillas[i].value);
+                        contCheck++;
+
+                    }
+                }
+            }
+
+            $('#Teams').val(listaTorneosvalues);
+
+            var concatTeams = makeString(listaTorneosvalues);
+            var TeamsListStr = document.getElementById('TeamsListStr');
+            TeamsListStr.value = concatTeams;
+
+        //console.log(listaTorneosvalues);
+        //console.log(concatTorneos);
+
+        }
+        
+    }
+
+    function isNullOrEmpty(str) {
+        var returnValue = false;
+        if (!str
+            || str == null
+            || str === 'null'
+            || str === ''
+            || str === '{}'
+            || str === 'undefined'
+            || str === '-Select-'
+            || str.length === 0) {
+            returnValue = true;
+        }
+        return returnValue;
+    }
+
+    function makeString(arr) {
+
+        if (!isNullOrEmpty(arr)) {
+            if (arr.length === 1) return arr[0];
+            const firsts = arr.slice(0, arr.length - 1);
+            const last = arr[arr.length - 1];
+            return firsts.join(', ') + ', ' + last;
+        }
+        else return "";
+
+    }
+
+    $("#profile-form").submit(function (event) {
+        /* stop form from submitting normally */
+        //event.preventDefault();
+
+        /* get some values from elements on the page: */
+        var $form = $(this),
+            $submit = $form.find('button[type="submit"]'),
+            FechaNacimiento = $form.find('input[name="FechaNacimiento"]').val(),
+            Role = $form.find('select[name="Role"]').val(),
+            TeamsListStr = $form.find('input[name="TeamsListStr"]').val(),
+            url = $form.attr('action');
+
+        var ret = true;
+        if (isNullOrEmpty(FechaNacimiento)) {
+
+            document.getElementById("requiredBirthday").style.display = '';
+
+            //$submit.text('wrong');
+            ret = false;
+        }
+        else {
+
+            document.getElementById("requiredBirthday").style.display = 'none';
+
+        }
+        //console.log("$form: ", $form)
+        //console.log("Role: ", Role)
+        if (isNullOrEmpty(Role)) {
+
+            document.getElementById("requiredRole").style.display = '';
+
+            //$submit.text('wrong');
+            ret = false;
+        }
+        else {
+
+            document.getElementById("requiredRole").style.display = 'none';
+
+        }
+
+        //console.log("TeamsListStr: ", TeamsListStr)
+        if (isNullOrEmpty(TeamsListStr)) {
+            document.getElementById("requiredTeamsListStr").style.display = '';
+
+            //$submit.text('wrong');
+            ret = false;
+        }
+        else {
+
+            document.getElementById("requiredTeamsListStr").style.display = 'none';
+
+        }
+
+        // send your data here, the form should be valid
+        //$submit.text('Send');
+        //$submit.attr("disabled", true);
+        return ret;
+    });
+
+    </script>
+
+}
+

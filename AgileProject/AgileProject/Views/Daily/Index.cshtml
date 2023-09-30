@@ -1,0 +1,189 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AgileProject.Entidades
+@*@inject SignInManager<AspNetUsers> SignInManager*@
+@*@inject UserManager<AspNetUsers> UserManager*@
+@using AgileProject.Model
+
+@{
+    ViewData["Title"] = "Daily";
+}
+
+@if (ViewBag.IsSignedIn != null)
+{
+    @if (ViewBag.IsSignedIn)
+    {
+        <div id="external-events" class="row">
+
+            <div style="float: right; display: flex; margin-bottom: 5px; ">
+                <span>
+                    <label style="font-size: small; margin-left: 10px;"></label>
+                    <partial name="_UserTeams" />
+                </span>
+
+            </div>
+
+        </div>
+        <div id="pageBody">
+
+            <div id="containerExample" class="bg">
+                <div id="panelMenu" style="position: absolute; margin-top: 15px; margin-left: 15px; z-index: 1; ">
+
+                    <div class="form-inline">
+                        <div id="field_wrapper">
+                            <div class="my-class-form-control-group">
+                                <button id="btnVerCronometro" title="Timer" class="btn btn-default sombra" style="display: none;"><img src="~/images/crono.png" width="30px"></button>
+                                <button id="btnVerCamara" title="Share desktop" class="btn btn-default sombra" style="display: none;"><img src="~/images/desktop.png" width="30px"></button>
+                                <button id="btnAddPersona" title="Add person" class="btn btn-default sombra"><img src="~/images/addPerson.png" width="30px"></button>
+                                <div id="divAgregar" style="display:none;">
+                                    <input type="text" class="form-control mr-2" name="txtName" id="txtName" onkeydown="pulsar(event)" placeholder="Agregar participante" autocomplete="name" />
+                                    <button type="button" class="btn btn-primary" style="height:40px; display: none;" id="btnAgregar">&#x2795;</button>
+                                </div>
+                                <button id="btnChangeBg" title="Change background" class="btn btn-default sombra"><img src="~/images/landscape.png" width="30px"></button>
+                                <div id="panelChangeBg" style="display: none;">
+                                    <form name="myForm" id="myForm">
+                                        <input id="myInput" name="myInput" class="form-control mr-2" type="file" autocomplete="off">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panelTitulo">
+                    <h1 style="color: whitesmoke">Daily Scrum</h1>
+
+                    <p style="text-align: center;">
+                        <button type="button" class="btn btn-success sombra" style="height: 40px;" id="btnIniciar">Start</button>
+                        <button type="button" class="btn btn-danger sombra" style="height:40px; display: none;" id="btnFinalizar">Finish</button>
+                        <span id="lblTiempoFinal" style="font-size:xx-large; color:white; display: none;"></span>
+                    </p>
+                </div>
+
+
+
+                <div id="panelSorteo" style="display: none;" class="scrum-board-sorteo bg-sorteo files-tree wrapper">
+                    <header>
+
+                        <div>
+                            <p style="text-align: center;">
+                                <button type="button" class="btn sombra" style="display: none; color: white;" id="btnGirar">Spin<span id="textoParticipantes" style="display: none;">&nbsp participantes &nbsp</span><span style="font-size: x-small; display: none;" id="numeroParticipantes"></span></button>
+                                <span id="timer" style="font-size: large; color:white; display: none;">3</span>
+
+                            </p>
+                        </div>
+                    </header>
+                    <div class="board-sorteo">
+                        <div id="container" class="contenedor">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="divCounter" style="position: absolute; display: none; top: 100px; z-index: 5;">
+                    <div class="form-inline contenedor">
+                        <div id="field_wrapper_clock" class="field_wrapper_clock">
+                            <div class="my-class-form-control-group">
+                                <span id="playtimer" style="font-size: xx-large; color:white; margin-left: 20px;">00:00</span>&nbsp;&nbsp;
+                                <button type="button" class="btn btn-success" id="btnPlayTimer" style="border-radius: 20px; margin-right: 20px;">&#9658;</button>
+                                <button type="button" class="btn btn-danger" id="btnStopTimer" style="border-radius: 20px; display:none; margin-right: 20px;">&#x25fc;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tvBoard" class="scrum-tv-board" style="position: absolute; top: 390px; display: none; ">
+                    <header>
+                        <div style="margin-top: 15px;">
+                            <p style="text-align: center; vertical-align: middle;">
+                                <span id="timer" style="font-size: large; color:white;">Screen</span>
+                            </p>
+                        </div>
+                    </header>
+                    <div class="col-12">
+                        <div class="screen">
+                            <!-- Your screen content goes here -->
+                            <video class="video frame" id="video" autoplay></video>
+                            <img id="imagen" class="imagen" alt="imagen" style="display: none;">
+                        </div>
+                        <button id="clock-btn" style="background-image: url(../images/pngwing.png); background-size: 20px;"></button>
+                    </div>
+                </div>
+
+                <div id="scrumBoard" class="scrum-board wrapper" style="position: absolute; margin-top: 250px; background-image: url(../images/confetti-gradient.gif); display: none;">
+                    <header>
+                        <div>
+                            <p style="text-align: center; vertical-align: middle;">
+                                <span id="timer" style="font-size: large; color:white;">Timebox</span>
+                            </p>
+                        </div>
+                    </header>
+                    <div id="board" class="board">
+                        <div id="seleccion" class="seleccion">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="0" role="dialog" aria-labelledby="modal-event-label" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" id="modalContent" style="width: 500px">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel" style="color: black"><span id="textoModal"></span></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label" style="color:black; font-size: x-large;" id="lblGanador"></label>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <!--<button type="button" class="btn btn-primary" style="display: none;">Enviar mensaje</button>
+                            -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    }
+}
+
+else
+{
+    <partial name="_LoginRegisterPartial" />
+}
+
+
+@section Scripts
+    {
+
+    <script src="~/js/data.js"></script>
+
+    <script src="~/js/dailySite.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        var el = document.getElementsByName("apps");
+
+        el.forEach((item, index, arreglo) => {
+            //console.log(item);
+            item.classList.add("active");
+        });
+    </script>
+}
+
+
+
+
+
+
+

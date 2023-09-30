@@ -1,0 +1,78 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AgileProject.Entidades
+@*@inject SignInManager<AspNetUsers> SignInManager*@
+@*@inject UserManager<AspNetUsers> UserManager*@
+
+@{
+    ViewData["Title"] = "Secure Zone";
+}
+
+@if (ViewBag.IsSignedIn != null)
+{
+    @if (ViewBag.IsSignedIn)
+    {
+
+        <h1>Manage your configuration</h1>
+
+        <div>
+            <h2>Secure Zone</h2>
+            <hr />
+            <div class="row">
+                <div class="col-md-3">
+                    <partial name="_Menu" />
+                </div>
+
+                <div class="col-md-9">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3>Secure Zone</h3>
+                            <div class="row" style="margin-bottom: 15px; margin-left: 1px;">
+                                <div style="display:inline;">
+                                    <div style="float:left;">
+                                        <h3></h3>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="padding: 0.5rem 1rem;">
+                                <p> <a class="text-dark" id="linkChangePassword" href="/SecureZone/ChangePassword">Change password</a> </p>
+                                @*<p> <a class="text-dark" id="linkteams" href="/Settings/ListTeams">Manage organization teams</a> </p>
+                                <p> <a class="text-dark" id="linkRoles" href="/Settings/ListRoles">Manage roles</a></p>*@
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    }
+}
+
+else
+{
+    <partial name="_LoginRegisterPartial" />
+}
+
+@section Scripts
+{
+
+    <script>
+        var el = document.getElementsByName("secureZone");
+
+        el.forEach((item, index, arreglo) => {
+            //console.log(item);
+            item.classList.add("active");
+        });
+
+    </script>
+
+}
+

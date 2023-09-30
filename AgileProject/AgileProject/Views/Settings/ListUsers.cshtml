@@ -1,0 +1,254 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AgileProject.Entidades
+@*@inject SignInManager<AspNetUsers> SignInManager*@
+@*@inject UserManager<AspNetUsers> UserManager*@
+
+@{
+    ViewData["Title"] = "Settings | Users";
+}
+
+@if (ViewBag.IsSignedIn != null)
+{
+    @if (ViewBag.IsSignedIn)
+    {
+
+        <h1>Manage your configuration</h1>
+
+        <div>
+            <h2>Change your settings</h2>
+            <hr />
+            <div class="row">
+                <div class="col-md-3">
+                    <partial name="_Menu" />
+
+                </div>
+
+                <div class="col-md-9">
+                    <h3><a class="text-dark" id="profile" href="/Settings">Settings</a> <span>&nbsp;>&nbsp;</span> <span>Change users information</span></h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row" style="margin-bottom: 30px; margin-left: 1px;">
+                                <div style="display:inline;">
+                                    @*<div style="float:left;">
+                                        <h3></h3>
+
+                                    </div>*@
+                                    <div style="float: left; display:none;">
+          
+                                        
+                                        @if (ViewBag.userTeamsList != null)
+                                        {
+                                            <div class="form-floating" style="display:inline;">
+                                                <label style="font-size: small;">Teams: </label>
+                                                <select id="myteamsList" name="myteamsList" class="form-control">
+                                                    <option value="all">-Todos-</option>
+                                                    @foreach (var item in ViewBag.userTeamsList)
+                                                    {
+                                                        <option value="@item.CalendarTypeId">@item.GroupType @item.Name</option>
+                                                    }
+                                                </select>
+
+                                            </div>
+                                        }
+
+                                    </div>
+                                    <div style="float:right;">
+                                        <a id="add" title="Add a new user" class="text-dark" style="font-size: 18px;" asp-area="" asp-controller="Settings" asp-action="NewUser">
+                                            <span class="fa-stack fa-sm">
+                                                <i class="fas fa-circle fa-stack-2x"></i>
+                                                <i class="fas fa-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-floating" style="display:none;">
+                                <input class="form-control" type="text" id="UserName" name="UserName" value="@ViewBag.UserName" />
+                                <label class="form-label" for="UserName">Username</label>
+                            </div>
+
+                            <div class="form-floating">
+                                <table id="dtBasicExample" class="table table-sm table-hover" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="th-sm">
+                                                #
+                                            </th>
+                                            <th class="th-sm">
+                                                Name
+                                            </th>
+                                            <th class="th-sm">
+                                                Birthday
+                                            </th>
+                                            <th class="th-sm">
+                                                Email
+                                            </th>
+                                            <th class="th-sm" style="display:none;" >
+                                                Teams
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @if (ViewBag.userList != null)
+                                        {
+                                            @foreach (var item in ViewBag.userList)
+                                            {
+                                                <tr>
+                                                    <td><a class="text-dark" href="/Settings/EditUser?id=@item.Id">@item.CustomId</a></td>
+                                                    <td><a class="text-dark" href="/Settings/EditUser?id=@item.Id">@item.Nombres @item.ApellidoPaterno @item.ApellidoMaterno </a></td>
+                                                    @if (@item.FechaNacimiento.ToString("dd/MM/yyyy") == "01/01/1900")
+                                                    {
+                                                        <td><a class="text-dark" href="/Settings/EditUser?id=@item.Id"></a></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td><a class="text-dark" href="/Settings/EditUser?id=@item.Id">@item.FechaNacimiento.ToString("dd/MM")</a></td>
+                                                    }
+
+                                                    <td><a class="text-dark" href="/Settings/EditUser?id=@item.Id">@item.UserName</a></td>
+                                                    <td><a class="text-dark" style="display:none;" href="/Settings/EditUser?id=@item.Id">@item.TeamsListStr</a></td>
+                                                    
+                                                </tr>
+                                            }
+
+                                        }
+
+
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    }
+}
+
+else
+{
+    <partial name="_LoginRegisterPartial" />
+}
+
+
+@section Scripts
+{
+
+    <script type="text/javascript">//pagination jquery
+        var oDataTable;
+
+        var myteamsList = document.getElementById("myteamsList");
+        myteamsList.addEventListener('change', onChangeMyTeamList);
+
+
+        $(document).ready(function () {
+
+
+            var el = document.getElementsByName("settings");
+
+            el.forEach((item, index, arreglo) => {
+                //console.log(item);
+                item.classList.add("active");
+            });
+
+
+            //$('#dtBasicExample').DataTable();
+            oDataTable = $('#dtBasicExample').DataTable({
+                "language": {
+                    //"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Registros",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 Registros",
+                    "infoFiltered": "(Filtrado de _MAX_ total Registros)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Registros",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+                //dom: 'B<"clear">lfrtip',
+                dom: "B<'container'>lfrtip", 
+                paging: true,
+                pageLength: 25,
+                lengthChange: true,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                order: [[0, 'asc'], [1, 'asc']],
+                buttons: [
+                    //'copy', 'excel', 'pdf', 'csv'
+                    'copy', 'excel'
+                ]
+            });
+
+            $('.dataTables_length').addClass('bs-select');
+        });
+
+        //
+
+
+        function onChangeMyTeamList() {
+
+            var e = document.getElementById("myteamsList");
+            var value = e.value;
+            var text = e.options[e.selectedIndex].text;
+            //document.getElementById("lblNombreSquad").innerHTML = text;
+
+            //console.log(oDataTable);
+            if (value == "all")
+                oDataTable.search("").draw();
+            else
+                oDataTable.search(text).draw();
+        }
+
+
+
+        function isNullOrEmpty(str) {
+            var returnValue = false;
+            if (!str
+                || str == null
+                || str === 'null'
+                || str === ''
+                || str === '{}'
+                || str === 'undefined'
+                || str === '-Select-'
+                || str.length === 0) {
+                returnValue = true;
+            }
+            return returnValue;
+        }
+
+
+
+    </script>
+
+}
+
+

@@ -1,0 +1,58 @@
+﻿
+
+@using Microsoft.AspNetCore.Identity
+@using AgileProject.Entidades
+@*@inject SignInManager<AspNetUsers> SignInManager*@
+@*@inject UserManager<AspNetUsers> UserManager*@
+@using AgileProject.Model
+
+@if (ViewBag.IsSignedIn != null)
+{
+    @if (ViewBag.IsSignedIn)
+    {
+        <h3>Profile</h3>
+        @if (ViewBag.IsOk == true)
+        {
+
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                Your profile has been updated
+            </div>
+        }
+        if (Model != null)
+        {
+            <div class="form-floating">
+                <input class="form-control" type="text" data-val="true" id="Nombres" name="Nombres" value="@Model.Nombres" />
+                <label class="form-label" for="Nombres">Names</label>
+                <span id="requiredNames" style="display:none" class="text-danger field-validation-error" data-valmsg-for="Nombres" data-valmsg-replace="true">
+                    <span id="rrequiredNames-error" class="">The Current names field is required.</span>
+                </span>
+            </div>
+            <div class="form-floating">
+                <input class="form-control" type="text" data-val="true" id="ApellidoPaterno" name="ApellidoPaterno" value="@Model.ApellidoPaterno" />
+                <label class="form-label" for="ApellidoPaterno">Father's surname</label>
+                <span id="requiredFsurname" style="display:none" class="text-danger field-validation-error" data-valmsg-for="ApellidoPaterno" data-valmsg-replace="true">
+                    <span id="requiredFsurname-error" class="">The Current father's surname field is required.</span>
+                </span>
+            </div>
+            <div class="form-floating">
+                <input class="form-control" type="text" data-val="true" id="ApellidoMaterno" name="ApellidoMaterno" value="@Model.ApellidoMaterno" />
+                <label class="form-label" for="ApellidoMaterno">Mother's surname</label>
+                <span id="requiredMsurname" style="display:none" class="text-danger field-validation-error" data-valmsg-for="ApellidoMaterno" data-valmsg-replace="true">
+                    <span id="requiredMsurname-error" class="">The Current mother's surname field is required.</span>
+                </span>
+            </div>
+            <div class="form-floating">
+                <input class="form-control" type="date" data-val="true" id="FechaNacimiento" name="FechaNacimiento" value="@Model.FechaNacimientoStr" />
+                <label class="form-label" for="FechaNacimiento">Date of birthday</label>
+                <span id="requiredBirthday" style="display:none" class="text-danger field-validation-error" data-valmsg-for="FechaNacimiento" data-valmsg-replace="true">
+                    <span id="requiredBirthday-error" class="">The Current birthday field is required.</span>
+                </span>
+            </div>
+
+        }
+
+    }
+
+
+}

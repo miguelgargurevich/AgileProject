@@ -1,0 +1,46 @@
+﻿
+
+@using Microsoft.AspNetCore.Identity
+@using AgileProject.Entidades
+@*@inject SignInManager<AspNetUsers> SignInManager*@
+@*@inject UserManager<AspNetUsers> UserManager*@
+@using AgileProject.Model
+
+
+
+@if (ViewBag.IsSignedIn != null)
+{
+    @if (ViewBag.IsSignedIn)
+    {
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div id="alertPanel" class="alert-warning alertCustom" style="display:none;">
+
+                    <div class="news">
+                        <marquee id="marquee" class="news-content" scrollamount="1" direction="up" onmouseover="this.stop();" onmouseout="this.start();">
+
+                            @if (ViewBag.Nombres == null || ViewBag.ApellidoPaterno == null || ViewBag.ApellidoMaterno == null)
+                            {
+                                <p><a href="/User/EditUser">Pelase complete your profile</a> </p>
+                            }
+                            @if (ViewBag.userTeamsList2 != null)
+                            {
+                                @foreach (var item in ViewBag.userTeamsList)
+                                {
+                                    <p>@item.CalendarTypeId - @item.GroupType - @item.Name</p>
+                                }
+                            }
+
+                        </marquee>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    }
+
+}

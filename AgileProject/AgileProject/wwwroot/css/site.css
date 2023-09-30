@@ -1,0 +1,326 @@
+﻿html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+   
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+a{
+    color:GrayText;
+}
+
+a:link, a:visited, a:active {
+    text-decoration: none;
+}
+
+footer {
+/*    position: absolute;*/
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 40px;
+}
+
+/* Fondo modal: negro con opacidad al 50% */
+.modalMenu {
+    display: none; /* Por defecto, estará oculto */
+    position: fixed; /* Posición fija */
+    z-index: 10; /* Se situará por encima de otros elementos de la página*/
+    /*padding-top: 200px;*/ /* El contenido estará situado a 200px de la parte superior */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Algura completa */
+    overflow: auto; /* Se activará el scroll si es necesario */
+    background-color: rgba(0,0,0,0.5); /* Color negro con opacidad del 50% */
+}
+
+.contenido-modal {
+    position: relative; /* Relativo con respecto al contenedor -modal- */
+    background-color: white;
+    margin: auto; /* Centrada */
+    padding: 20px;
+    width: 60%;
+/*    -webkit-animation-name: animarsuperior;
+    -webkit-animation-duration: 1s;
+    animation-name: animarsuperior;
+    animation-duration: 1s;*/
+
+}
+
+.modalMenuContent {
+    height: 100% !important;
+    float: right !important;
+    width: 250px;
+    border: 0px !important;
+    background-color: white; /* rgba(0,0,0,0.9);*/ /* Color negro con opacidad del 50% */
+    border-radius: 0px !important;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {
+        right: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animarsuperior {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+.closeMenu {
+    color: black;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+    .closeMenu:hover,
+    .closeMenu:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+
+
+/*    ////////*/
+
+.containerCheckbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    /* font-size: medium; */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: normal;
+}
+
+    /* Hide the browser's default checkbox */
+    .containerCheckbox input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 23px;
+    width: 23px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.containerCheckbox:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerCheckbox input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.containerCheckbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerCheckbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* Create a custom checkbox */
+.checkmarkBlank {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 23px;
+    width: 23px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.containerCheckbox:hover input ~ .checkmarkBlank {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerCheckbox input:checked ~ .checkmarkBlank {
+/*    background-color: #2196F3;*/
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmarkBlank:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.containerCheckbox input:checked ~ .checkmarkBlank:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerCheckbox .checkmarkBlank:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+
+
+
+
+.card-deck {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.img-fluid {
+    max-width: 100%;
+    /* height: auto; */
+}
+
+
+.card-body {
+/*    width: 70%;*/
+}
+
+.divPadre {
+
+    text-align: center;
+   
+}
+.divHijo {
+
+    margin: 0px auto;
+
+}
+
+
+.news {
+    margin-left: 30px;
+    margin-right: 50px;
+}
+
+.news marquee {
+    font-size: 18px;
+    margin-top: 12px
+}
+
+.news-content {
+    height: 30px;
+}
+
+.news-content p {
+    margin-right: 40px;
+    /* display: inline; */
+    font-weight: 300;
+    line-height: 1.4;
+    
+}
+
+.alertCustom {
+
+    
+    margin-bottom: 5px;
+}
+
+
+/*fin fullcalendar mini*/
+@media screen and (max-width: 1000px) {
+    #menuInside {
+        display: none;
+    }
+}
+
+
+#divPadreHome {
+/*    height: 100px;*/
+    width: 100%;
+    text-align: center;
+/*    background-color: blue;*/
+}
+
+#divHijoHome {
+    /*    height: 50px;
+    width: 400px;*/
+    margin: 0px auto;
+/*    display: flex;
+    justify-content: center;
+    align-items: center;*/
+    /*    background-color: red;*/
+}
+
+.divCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

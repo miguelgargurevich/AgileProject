@@ -1,0 +1,81 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AgileProject.Entidades
+@*@inject SignInManager<AspNetUsers> SignInManager*@
+@*@inject UserManager<AspNetUsers> UserManager*@
+@using AgileProject.Model
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div>
+    <div id="calendarGrid"></div>
+    <div id="calendarList"></div>
+</div>
+
+@if (ViewBag.IsSignedIn != null)
+{
+    @if (ViewBag.IsSignedIn)
+    {
+
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h1 class="display-4">Our most popular apps</h1>
+            <p class="lead">These useful tools are for you, we encorage you to live in agility.</p>
+            <p class="lead">Be brave!</p>
+        </div>
+        <br />
+
+        <div id="divPadreHome">
+            <div id="divHijoHome" class="divCenter" >
+
+                <div class="col-md-3 divCenter" >
+                    <div class="card" style="width: 18rem;">
+                        <a asp-area="" asp-controller="Calendar" asp-action="Index">
+                            <img src="~/images/appCalendar.png" class="card-img-top" height="200px" style="/* margin:30px; */ margin-top: 17px; margin-bottom: 17px;">
+                        </a>
+                        <div class="card-body">
+                            @*<h5 class="card-title">Calendar</h5>*@
+                            <p class="card-text"></p>
+                            <a asp-area="" asp-controller="Calendar" asp-action="Index" class="btn btn-default">Go Calendar</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 divCenter" >
+                    <div class="card" style="width: 18rem;">
+                        <a asp-area="" asp-controller="Daily" asp-action="Index">
+                            <img src="~/images/appDaily.png" class="card-img-top" height="200px" style="/* margin:30px; */ margin-top: 17px; margin-bottom: 17px;">
+                        </a>
+                        <div class="card-body">
+                            @*<h5 class="card-title">Daily Tool</h5>*@
+                            <p class="card-text"></p>
+                            <a asp-area="" asp-controller="Daily" asp-action="Index" class="btn btn-default">Go Daily Tool</a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+               
+
+            </div>
+        </div>
+
+
+      
+
+    }
+}
+
+else
+{
+    <partial name="_LoginRegisterPartial" />
+}
+
+<script>var el = document.getElementsByName("apps");
+
+    el.forEach((item, index, arreglo) => {
+        //console.log(item);
+        item.classList.add("active");
+    });</script>

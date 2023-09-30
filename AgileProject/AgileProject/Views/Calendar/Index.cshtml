@@ -1,0 +1,265 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AgileProject.Entidades
+@*@inject SignInManager<AspNetUsers> SignInManager*@
+@*@inject UserManager<AspNetUsers> UserManager*@
+@using AgileProject.Model
+
+
+@model CalendarModel
+@{
+    ViewData["Title"] = "Calendar";
+}
+
+@if (ViewBag.IsSignedIn != null)
+{
+    @if (ViewBag.IsSignedIn)
+    {
+
+
+        <div>
+
+            <div id="external-events" class="row">
+
+                <div style="float: right; display: flex; margin-bottom: 5px; ">
+                    <span>
+                        <label style="font-size: small; margin-left: 10px;"></label>
+                        <partial name="_UserTeams" />
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div>
+                <div id="top_1" class="col-md-2">
+                    <div id="divFilter">
+                        @*<div>
+                                <label class="toggler-wrapper style-25">Search:</label>
+
+                            </div>*@
+                        <div class='input-group date' id='mySearch'>
+                            <input type='text' id="searchInput" class="form-control" placeholder="Buscar" />
+                            <span id="btnSearchFilter" class="input-group-addon">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </span>
+                        </div>
+                        <br />
+                        <div>
+                            @foreach (var item in Model.EvenTypeList)
+                            {
+                                <label class="containerCheckbox">
+                                    @item.Name
+                                    <input type="checkbox" class="" value="@item.Id" checked id="@item.Name" name="event-tag-chkEventType">
+                                    <span class="checkmarkBlank" style="background-color:@item.Color;"></span>
+                                </label>
+                            }
+
+
+                        </div>
+                        <br />
+                        <a href="#" class="link" id="abrirVentana">
+                            <div class="flexboxCalendar col-12 col-sm-12">
+                                <div style="width:100%;">
+                                    <img src="~/images/HappyBirthday2.png" height="80px" style="margin-top:10px;" />
+                                </div>
+                                <div style="color: #788199;">@DateTime.Now.ToString("MMMM")</div>
+                                <div id="divContainerCumples" style="width: 100%; margin-top: 10px; margin-bottom: 10px; ">
+                                    @if (ViewBag.CalendarList != null)
+                                    {
+
+                                        @if (ViewBag.CalendarList.Count > 0)
+                                        {
+
+                                            @foreach (var item in ViewBag.CalendarList)
+                                            {
+                                                <div id="divCumple_@item.CalendarTypeId" style=" color: #788199;" class="col-12">@item.Title @item.StartDate.ToString("dd/MM")</div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div style="color: #788199;" class="col-12">No hay cumpleaños este mes</div>
+                                        }
+                                    }
+
+
+                                </div>
+                            </div>
+                        </a> 
+                    </div>
+
+
+                    <div id="top_2">
+                        <div id='calendarMini'></div>
+                    </div>
+
+                </div>
+
+                <div id="divContainerCalendar" class="col-md-10" style="margin-top: 15px;">
+                    <div id="calendar"></div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div id="contextMenu" class="dropdown clearfix">
+
+        </div>
+
+        <!--* Modal New init *-->
+        <div class="modal fade" id="new-event" tabindex="0" role="dialog" aria-labelledby="new-event-label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content bordes-transparentes" id="modal-content">
+                    <div class="modal-header">
+                        <a class="close" data-dismiss="modal">×</a>
+                        <h3><span id="eventNameTitleCRUD"></span>&nbsp;<span id="eventNameTitle"></span></h3>
+                    </div>
+                    <div class="modal-body">
+
+                        <form class="new-event--form">
+
+                            <div class="row justify-content-start">
+                                <div class="col-md-6">
+
+                                    <label class="form-control-label">Event</label>
+                                    <div class='input-group' id='eventTypeUser'>
+                                        <select id="eventTypeList" name="eventTypeList" class="form-control">
+
+                                            @foreach (var item in Model.EvenTypeList)
+                                            {
+                                                <option value="@item.Id" id="@item.Color">@item.Name</option>
+                                            }
+                                        </select>
+                                        <span class="input-group-addon myinput-group-addon">
+                                            <span id="iconFlag" style="font-size:large;" class="glyphicon glyphicon-flag"></span>
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6" style="margin-top: 30px;">
+
+                                    <label id="label-new-event--allDay" class="containerCheckbox">
+                                        All day event
+                                        <input class='form-control' id="new-event--allDay" name="new-event--allDay" type="checkbox" checked>
+                                        <span class="checkmarkBlank" style="background-color: #2196F3;"></span>
+                                    </label>
+
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-start">
+                                <div class="col-md-12">
+
+                                    <label class="form-control-label">Title</label>
+                                    <input type="text" id="new-event--title" class="form-control form-control-alternative new-event--title" placeholder="Event title">
+
+                                </div>
+
+                            </div>
+
+                            <div class="row justify-content-start">
+                                <div class="col-md-6">
+                                    <label class="form-control-label">Start date</label>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker1'>
+                                            <input type='text' id="new-event--start" class="form-control new-event--start" />
+                                            <span class="input-group-addon myinput-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div id="divEndDateNew" class="form-group" style="display:none;">
+                                        <label class="form-control-label">End date</label>
+                                        <div class='input-group myinput-group-addon date' id='datetimepicker2'>
+                                            <input type='text' id="new-event--end" class="form-control new-event--end" />
+                                            <span class="input-group-addon myinput-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row justify-content-start">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Description</label>
+                                        <textarea id="new-event--description" class="form-control form-control-alternative new-event--description" style="height:70px;" placeholder="Description"></textarea>
+                                        <i class="form-group--bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="new-event--id" class="new-event--id">
+                            <input type="hidden" id="new-event--handlingAllDay" class="new-event--allDay" value="false" />
+                            <input type="hidden" id="new-event--start-h" class="new-event--start-h" />
+                            <input type="hidden" id="new-event--end-h" class="new-event--end-h" />
+                            <input type="hidden" id="new-event--username" class="new-event--username" value="@ViewBag.UserName" />
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <div class="btn-group">
+                                @if (ViewBag.IsAdmin)
+                                {
+                                    <button type="submit" class="btn btn-danger" data-calendar="delete" data-dismiss="modal" id="btnEliminar">Delete</button>
+
+                                }
+                                <button type="submit" class="btn btn-primary" data-calendar="update" data-dismiss="modal" id="btnActualizar">Update</button>
+                                <button type="submit" class="btn btn-primary" data-dismiss="modal" id="btnAgregar">Add event</button>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    }
+}
+
+else
+{
+    <partial name="_LoginRegisterPartial" />
+
+}
+
+
+
+@section Scripts
+{
+
+    <script src='~/js/holidays.js'></script>
+    <script src='~/js/birthdays.js'></script>
+    <script src='~/js/vacations.js'></script>
+    <script src='~/js/sessions.js'></script>
+    <script src='~/js/others.js'></script>
+
+    <script src="~/lib/fullcalendar/index.global.js"></script>
+
+    <script src="~/js/calendarSite.js" asp-append-version="true"></script>
+
+    <script>
+        var el = document.getElementsByName("apps");
+
+        el.forEach((item, index, arreglo) => {
+            //console.log(item);
+            item.classList.add("active");
+        });</script>
+
+
+}
+
+
+
+
+
+

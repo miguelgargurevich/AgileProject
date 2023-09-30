@@ -1,0 +1,193 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AgileProject.Entidades
+@*@inject SignInManager<AspNetUsers> SignInManager*@
+@*@inject UserManager<AspNetUsers> UserManager*@
+
+@{
+    ViewData["Title"] = "Settings | Roles";
+}
+
+@if (ViewBag.IsSignedIn != null)
+{
+    @if (ViewBag.IsSignedIn)
+    {
+
+        <h1>Manage your configuration</h1>
+
+        <div>
+            <h2>Change your settings</h2>
+            <hr />
+            <div class="row">
+                <div class="col-md-3">
+                    <partial name="_Menu" />
+
+                </div>
+
+                <div class="col-md-9">
+                    <h3><a class="text-dark" id="profile" href="/Settings">Settings</a> <span>&nbsp;>&nbsp;</span> <span>Manage roles</span></h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row" style="margin-bottom: 30px; margin-left: 1px;">
+                                <div style="display:inline;">
+                                    <div style="float:left;">
+                                        <h3></h3>
+
+                                    </div>
+                                    <div style="float:right;">
+                                        <a id="add" title="Add a new role" class="text-dark" style="font-size: 18px;" asp-area="" asp-controller="Settings" asp-action="NewRole">
+                                            <span class="fa-stack fa-sm">
+                                                <i class="fas fa-circle fa-stack-2x"></i>
+                                                <i class="fas fa-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-floating" style="display:none;">
+                                <input class="form-control" type="text" id="UserName" name="UserName" value="@ViewBag.UserName" />
+                                <label class="form-label" for="UserName">Username</label>
+                            </div>
+
+                            <div class="form-floating">
+                                <table id="dtBasicExample" class="table table-sm table-hover" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="th-sm">
+                                                #
+                                            </th>
+                                            <th class="th-sm">
+                                                Name
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @if (ViewBag.roleList != null)
+                                        {
+                                            @foreach (var item in ViewBag.roleList)
+                                            {
+
+                                                <tr>
+                                                    <td><a class="text-dark" href="/Settings/EditRole?id=@item.Id">@item.CustomId</a></td>
+                                                    <td><a class="text-dark" href="/Settings/EditRole?id=@item.Id">@item.NormalizedName (@item.Name)</a></td>
+
+
+                                                </tr>
+                                            }
+
+                                        }
+
+
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    }
+}
+
+else
+{
+    <partial name="_LoginRegisterPartial" />
+}
+
+
+@section Scripts
+{
+
+
+    <script type="text/javascript">//pagination jquery
+        $(document).ready(function () {
+
+
+            var el = document.getElementsByName("settings");
+
+            el.forEach((item, index, arreglo) => {
+                //console.log(item);
+                item.classList.add("active");
+            });
+
+
+            //$('#dtBasicExample').DataTable();
+            $('#dtBasicExample').DataTable({
+                "language": {
+                    //"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                    "decimal": "",
+                    "emptyTable": "No hay información",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Registros",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 Registros",
+                    "infoFiltered": "(Filtrado de _MAX_ total Registros)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ Registros",
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "search": "Buscar:",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                },
+                //dom: 'B<"clear">lfrtip',
+                dom: "B<'container'>lfrtip", 
+                paging: true,
+                pageLength: 10,
+                lengthChange: true,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
+                order: [[0, 'asc'], [1, 'asc']],
+                buttons: [
+                    //'copyHtml5', 'excelHtml5', 'pdfHtml5', 'csvHtml5'
+                    'copy', 'excel'
+                ]
+            });
+
+            $('.dataTables_length').addClass('bs-select');
+        });
+
+        //
+
+
+        function isNullOrEmpty(str) {
+            var returnValue = false;
+            if (!str
+                || str == null
+                || str === 'null'
+                || str === ''
+                || str === '{}'
+                || str === 'undefined'
+                || str === '-Select-'
+                || str.length === 0) {
+                returnValue = true;
+            }
+            return returnValue;
+        }
+    </script>
+
+}
+
+

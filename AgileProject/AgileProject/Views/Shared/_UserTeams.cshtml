@@ -1,0 +1,40 @@
+﻿
+
+@using Microsoft.AspNetCore.Identity
+@using AgileProject.Entidades
+@*@inject SignInManager<AspNetUsers> SignInManager*@
+@*@inject UserManager<AspNetUsers> UserManager*@
+@using AgileProject.Model
+
+
+@if (ViewBag.IsSignedIn != null)
+{
+    @if (ViewBag.IsSignedIn)
+    {
+
+        @if (ViewBag.userTeamsList != null)
+        {
+            <div class="form-floating" style="margin-right: 10px; margin-top: 5px; display: inline-flex;">
+                <a id="icon-notification" onclick="showNotification();" style="display:none;"><i class="fa-solid fa-bell" style="margin-top: 10px; margin-right:10px; cursor:pointer;"></i></a>
+
+                <select id="myteamsList" name="myteamsList" class="form-control" style="background-color: #ddd; border: 0;">
+                    
+                    @foreach (var item in ViewBag.userTeamsList)
+                    {
+                        <option value="@item.CalendarTypeId">@item.GroupType @item.Name</option>
+                    }
+                </select>
+            </div>
+        }
+
+    }
+
+}
+
+<script type="text/javascript">function showNotification() {
+        var alertPanel = document.getElementById("alertPanel");
+        alertPanel.style.display = alertPanel.style.display === 'none' ? '' : 'none';
+
+        //var marquee = document.getElementById("marquee");
+        //marquee.stop();
+    }</script>

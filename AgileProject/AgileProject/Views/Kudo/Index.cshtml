@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AgileProject.Entidades
+@*@inject SignInManager<AspNetUsers> SignInManager*@
+@*@inject UserManager<AspNetUsers> UserManager*@
+@using AgileProject.Model
+
+@{
+    ViewData["Title"] = "Kudos";
+}
+
+@if (ViewBag.IsSignedIn)
+{
+    <div id="external-events" class="row">
+
+        <div style="float: right; display: flex; margin-bottom: 5px; ">
+            <span>
+                <label style="font-size: small; margin-left: 10px;"></label>
+                <partial name="_UserTeams" />
+            </span>
+
+        </div>
+
+    </div>
+    <div id="divContainer">
+        @*<iframe class="doc" src="https://app.mural.co/t/ayllu6528/m/ayllu6528/1689787122035/ce7b2f691678e53e1c3433b8a37242a381615582?sender=a1fa2006-3c16-4bc4-b8f7-18573327f065&embedded=true"></iframe>*@
+
+    </div>
+
+
+}
+else
+{
+    <partial name="_LoginRegisterPartial" />
+}
+
+
+@section Scripts
+{
+
+    <script src="~/js/KudoSite.js"></script>
+
+}
+
+
+
+
+
+
+

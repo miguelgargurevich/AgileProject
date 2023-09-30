@@ -1,0 +1,78 @@
+﻿
+
+@using Microsoft.AspNetCore.Identity
+@using AgileProject.Entidades
+@*@inject SignInManager<AspNetUsers> SignInManager*@
+@*@inject UserManager<AspNetUsers> UserManager*@
+@using AgileProject.Model
+
+
+
+@if (ViewBag.IsSignedIn != null)
+{
+    @if (ViewBag.IsSignedIn)
+    {
+
+        @if (Model != null)
+        {
+
+            <h3>Teamwork</h3>
+            @if (ViewBag.IsOk == true)
+            {
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                    Your teamwork has been updated
+                </div>
+            }
+            @if (ViewBag.teamsList != null)
+            {
+                <div class="form-floating" id="divTeamsList">
+                    @foreach (var item in ViewBag.teamsList)
+                    {
+                        <label class="containerCheckbox">
+                            @item.GroupType @item.Name
+                            <input type="checkbox" value="@item.Id" checked="@item.IsChecked" id="chk@(item.Id)" onchange="evalCheckOpcion(@item.Id)">
+                            <span class="checkmark"></span>
+                        </label>
+                    }
+
+
+                    <label class="form-label" for="Input_Teams">Team</label>
+                    <span id="requiredTeamsListStr" style="display:none" class="text-danger field-validation-valid" data-valmsg-for="Role" data-valmsg-replace="true">
+                        <span id="requiredTeamsListStr-error" class="">The Current team field is required.</span>
+                    </span>
+                </div>
+
+                <input class="form-control" style="display:none" type="text" data-val="true" id="TeamsListStr" name="TeamsListStr" />
+                <select id="Teams" name="Teams" class="form-control" style="display:none" multiple value="@Model.Teams">
+                    @foreach (var item in ViewBag.teamsList)
+                    {
+                        <option value="@item.Id">@item.GroupType @item.Name</option>
+                    }
+                </select>
+                <br />
+            }
+
+            @if (ViewBag.roleList != null)
+            {
+                <div class="form-floating">
+
+                    <select id="Role" name="Role" class="form-control" option="selected" value="@Model.Role">
+                        <option>-Select-</option>
+                        @foreach (var item in ViewBag.roleList)
+                        {
+                            <option value="@item.Id">@item.NormalizedName - (@item.Name)</option>
+                        }
+                    </select>
+                    <label class="form-label" for="Input_Role">Role</label>
+                    <span id="requiredRole" style="display:none" class="text-danger field-validation-valid" data-valmsg-for="Role" data-valmsg-replace="true">
+                        <span id="requiredRole-error" class="">The Current role field is required.</span>
+                    </span>
+                </div>
+            }
+
+        }
+
+    }
+}
+
