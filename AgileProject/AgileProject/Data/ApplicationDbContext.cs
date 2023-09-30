@@ -18,7 +18,6 @@ public class ApplicationDbContext : DbContext
         options.UseSqlServer(Configuration.GetConnectionString("dbDocker"));
     }
 
-    //public DbSet<UserRoles> UserRoles { get; set; }
     public DbSet<UserCalendarType> UserCalendarType { get; set; }
     public DbSet<EventType> EventType { get; set; }
     public DbSet<CalendarType> CalendarType { get; set; }

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,11 +21,17 @@ builder.Services.AddScoped<ICalendarServices, CalendarServices>();
 builder.Services.AddScoped<ICalendarRepository, CalendarRepository>();
 
 // Add services to the container.
-//var connectionString = builder.Configuration.GetConnectionString("dbDesa"); //DefaultConnection
+var connectionString = builder.Configuration.GetConnectionString("dbDocker"); //DefaultConnection
 //builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
-//builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//{
+//    options.UseSqlServer(connectionString);
+//}, ServiceLifetime.Scoped);
 
-builder.Services.AddDbContext<ApplicationDbContext>();
+//builder.Services.AddDbContext<ApplicationDbContext>(); //ok
+builder.Services.AddDbContext<ApplicationDbContext>(ServiceLifetime.Scoped);
+
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddLogging(builder =>

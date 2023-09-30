@@ -69,67 +69,12 @@ insert into CalendarType values ('AcselX','Chapter',1);
 insert into CalendarType values ('Los Hermanos Zañartu','Squad',1);
 
 
-insert into usercalendartype values ('webmaster',1,'','')
-insert into usercalendartype values ('webmaster',2,'','')
-insert into usercalendartype values ('webmaster',3,'','')
+insert into usercalendartype values ('webmaster',1,null,null,null)
+insert into usercalendartype values ('webmaster',2,null,null,null)
+insert into usercalendartype values ('webmaster',3,null,null,null)
 
-insert into usercalendartype (username,CalendarTypeId)
-select UserName, 1 from dbo.[AspNetUsers] a where a.email not in ('webmaster')
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('0FCCE089-F2F2-4CC9-BF3F-E7120E55A1B0',0,'22522292-f147-487c-af39-8e3809d255db','jesus.torres@mdp.com.pe',1,1,NULL,'jesus.torres@mdp.com.pe','jesus.torres@mdp.com.pe','UABhAHMAcwB3AG8AcgBkADEAIQA=',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'jesus.torres@mdp.com.pe','Jesús Andy','Torres','Mendoza','2023-08-02')
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('1376263B-C3BA-485B-BF98-F211202DBBA7',0,'22522292-f147-487c-af39-8e3809d255db','jespinoza@pacifico.com.pe',1,1,NULL,'jespinoza@pacifico.com.pe','jespinoza@pacifico.com.pe','UABhAHMAcwB3AG8AcgBkADEAIQA=',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'jespinoza@pacifico.com.pe','Jorge Wilson','Espinoza','Chamaya','2023-12-16')
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('4904607F-83F2-4B19-9D8A-9FAA761FAE52',0,'22522292-f147-487c-af39-8e3809d255db','marco.pirela@inetum.com',1,1,NULL,'marco.pirela@inetum.com','marco.pirela@inetum.com','UABhAHMAcwB3AG8AcgBkADEAIQA=',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'marco.pirela@inetum.com','Marco Antonio ','Pierla','Navarro','2023-05-30')
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('5629D776-02C6-4D93-98A9-1B1D3313F906',0,'22522292-f147-487c-af39-8e3809d255db','isaipalavicinih@pacifico.com.pe',1,1,NULL,'isaipalavicinih@pacifico.com.pe','isaipalavicinih@pacifico.com.pe','UABhAHMAcwB3AG8AcgBkADEAIQA=',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'isaipalavicinih@pacifico.com.pe','Isai Baudy','Palavicini','Hinostroza','2023-08-16')
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('604628FC-FCC1-4A63-974D-1BF21904E841',0,'22522292-f147-487c-af39-8e3809d255db','carlajohnstonc@pacifico.com.pe',1,1,NULL,'carlajohnstonc@pacifico.com.pe','carlajohnstonc@pacifico.com.pe','UABAAHMAcwB3AG8AcgBkAA==',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'carlajohnstonc@pacifico.com.pe','Carla Denise','Johnston','de la Cuba','1900-01-01')
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('70CF156E-BE17-4B35-B127-9F3892D32D46',0,'22522292-f147-487c-af39-8e3809d255db','aneyra@soaint.com',1,1,NULL,'aneyra@soaint.com','aneyra@soaint.com','UABhAHMAcwB3AG8AcgBkADEAIQA=',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'aneyra@soaint.com','Antony','Neyra','Hidalgo','2023-06-15')
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('81557B10-8F72-49A3-A866-58526FBE3E3E',0,'22522292-f147-487c-af39-8e3809d255db','billy.fernandez_consultor@mdp.com.pe',1,1,NULL,'billy.fernandez_consultor@mdp.com.pe','billy.fernandez_consultor@mdp.com.pe','UABhAHMAcwB3AG8AcgBkADEAIQA=',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'billy.fernandez_consultor@mdp.com.pe','Billy George','Fernández','Quillay','2023-08-21')
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('B1F5DE01-A60A-4A33-9EF9-8E43B5E20E3D',0,'22522292-f147-487c-af39-8e3809d255db','julioyanaricoc@pacifico.com.pe',1,1,NULL,'julioyanaricoc@pacifico.com.pe','julioyanaricoc@pacifico.com.pe','UABhAHMAcwB3AG8AcgBkADEAIQA=',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'julioyanaricoc@pacifico.com.pe','Julio Cesar','Yanarico','Cayo',NULL)
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('B9B789F6-D5B3-4671-B53F-BED967E13F3F',0,'22522292-f147-487c-af39-8e3809d255db','cristhian.gutarra@tivit.com',1,1,NULL,'cristhian.gutarra@tivit.com','cristhian.gutarra@tivit.com','UABhAHMAcwB3AG8AcgBkADEAIQA=',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'cristhian.gutarra@tivit.com','Cristhian','Gutarra','Leigh','2023-12-15')
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('D81F9976-7E57-4F24-A884-4E614F750FB4',0,'22522292-f147-487c-af39-8e3809d255db','rmelendm@nttdata.com',1,1,NULL,'rmelendm@nttdata.com','rmelendm@nttdata.com','UABhAHMAcwB3AG8AcgBkADEAIQA=',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'rmelendm@nttdata.com','Ricardo Anthony','Melendres','Martel','2023-08-24')
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('D99957BB-B94D-4DB2-8BED-1B4FC17C51A8',0,'22522292-f147-487c-af39-8e3809d255db','JoseRazuriO@pacifico.com.pe',1,1,NULL,'JoseRazuriO@pacifico.com.pe','JoseRazuriO@pacifico.com.pe','UABhAHMAcwB3AG8AcgBkADEAIQA=',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'JoseRazuriO@pacifico.com.pe','José Carlos','Razuri','Ozorio','2024-01-23')
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('E598B608-5818-4566-B865-33C843E887A2',0,'22522292-f147-487c-af39-8e3809d255db','mflor@pacifico.com.pe',1,1,NULL,'mflor@pacifico.com.pe','mflor@pacifico.com.pe','UABhAHMAcwB3AG8AcgBkADEAIQA=',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'mflor@pacifico.com.pe','Mariana Milagros','Flor','Espinoza','2023-08-26')
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('ED1D9E00-76ED-467C-94FE-2F817A9F4089',0,'22522292-f147-487c-af39-8e3809d255db','miguel.fernandez-gargurevich@inetum.com',1,1,NULL,'miguel.fernandez-gargurevich@inetum.com','miguel.fernandez-gargurevich@inetum.com','YQBzAGQAYQBzAGQA',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'miguel.fernandez-gargurevich@inetum.com','Miguel','Fernandez','Gargurevich','1981-06-25')
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('F789CE1D-4279-47D5-83B9-13F21E6CDBAE',0,'22522292-f147-487c-af39-8e3809d255db','harry.huanilo@mdp.com.pe',1,1,NULL,'harry.huanilo@mdp.com.pe','harry.huanilo@mdp.com.pe','UABhAHMAcwB3AG8AcgBkADEAIQA=',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'harry.huanilo@mdp.com.pe','Harry Maiker','Huanilo','Mori','2023-09-10')
-
-
-insert into AspNetUsers (Id,AccessFailedCount,ConcurrencyStamp,Email,EmailConfirmed,LockoutEnabled,LockoutEnd,NormalizedEmail,NormalizedUserName,PasswordHash,PhoneNumber,PhoneNumberConfirmed,SecurityStamp,TwoFactorEnabled,UserName,Nombres,ApellidoPaterno,ApellidoMaterno,FechaNacimiento)
-values ('W88957BB-4279-47D5-83B9-13F21E6CDBAE',0,'22522292-f147-487c-af39-8e3809d255db','Leoncio.sanchez-montanez@inetum.com',1,1,NULL,'Leoncio.sanchez-montanez@inetum.com','Leoncio.sanchez-montanez@inetum.com','UABhAHMAcwB3AG8AcgBkADEAIQA=',NULL,0,'5UBJN54F7PXR6KDYQDEM74K7DZRP6VHQ',0,'Leoncio.sanchez-montanez@inetum.com','Leoncio','Sanchez','Montanez','2023-01-01')
-
-
-insert into AspNetUserRoles (UserId, RoleId) 
-select Id, 11 from dbo.[AspNetUsers] a where a.email not in ('webmaster')
-
-insert into AspNetUserRoles values
-((select Id from AspNetUsers where username = 'webmaster'),1,'','','','')
-
-
+insert into usercalendartype (username,CalendarTypeId,Name,GroupType)
+select UserName, 1, null,null from dbo.[AspNetUsers] a where a.email not in ('webmaster')
 
 
 insert into [dbo].[Calendar](title,start,[end],description,eventtypeid,calendartypeid,calendartypename,dateCreate,allday,UserName,userCreate) values
@@ -188,3 +133,393 @@ insert into [dbo].[Calendar](title,startdate,enddate,description,eventtypeid,eve
 ('Sprint Retrospective - Q3S5','2023-09-19 14:00:00.000','2023-09-19 15:30:00.000',"Mural:
 https://app.mural.co/t/ayllu6528/m/ayllu6528/1695151049809/145d51a04208b2fd4839b0ce8e82756c3a56d5e9?sender=u62f81034f0f69618b8640045",3,'Session',1,'Los Trovadores Criollos','2023-09-19 15:03:15.077',0,'webmaster','0AE9BFB8-A7CA-437C-A203-E41CD1B7B219')
 */
+
+INSERT INTO AspNetUserRoles
+SELECT Id, 1, NULL, NULL, NULL, NULL
+FROM AspNetUsers
+WHERE UserName IN ('webmaster');
+
+
+INSERT INTO AspNetUserRoles
+SELECT Id, 11, NULL, NULL, NULL, NULL
+FROM AspNetUsers
+WHERE UserName NOT IN ('webmaster');
+
+
+-- Insert 1
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    '0FCCE089-F2F2-4CC9-BF3F-E7120E55A1B0',
+    'jesus.torres@mdp.com.pe',
+    1,
+    'UABhAHMAcwB3AG8AcgBkADEAIQA=',
+    'jesus.torres@mdp.com.pe',
+    NULL,
+    0,
+    'Jesús Andy',
+    'Torres',
+    'Mendoza',
+    '2023-08-02'
+);
+
+-- Insert 2
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    '1376263B-C3BA-485B-BF98-F211202DBBA7',
+    'jespinoza@pacifico.com.pe',
+    1,
+    'UABhAHMAcwB3AG8AcgBkADEAIQA=',
+    'jespinoza@pacifico.com.pe',
+    NULL,
+    0,
+    'Jorge Wilson',
+    'Espinoza',
+    'Chamaya',
+    '2023-12-16'
+);
+
+-- Insert 3
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    '4904607F-83F2-4B19-9D8A-9FAA761FAE52',
+    'marco.pirela@inetum.com',
+    1,
+    'UABhAHMAcwB3AG8AcgBkADEAIQA=',
+    'marco.pirela@inetum.com',
+    NULL,
+    0,
+    'Marco Antonio',
+    'Pierla',
+    'Navarro',
+    '2023-05-30'
+);
+
+-- Insert 4
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    '5629D776-02C6-4D93-98A9-1B1D3313F906',
+    'isaipalavicinih@pacifico.com.pe',
+    1,
+    'UABhAHMAcwB3AG8AcgBkADEAIQA=',
+    'isaipalavicinih@pacifico.com.pe',
+    NULL,
+    0,
+    'Isai Baudy',
+    'Palavicini',
+    'Hinostroza',
+    '2023-08-16'
+);
+
+-- Insert 5
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    '604628FC-FCC1-4A63-974D-1BF21904E841',
+    'carlajohnstonc@pacifico.com.pe',
+    1,
+    'UABAAHMAcwB3AG8AcgBkAA==',
+    'carlajohnstonc@pacifico.com.pe',
+    NULL,
+    0,
+    'Carla Denise',
+    'Johnston',
+    'de la Cuba',
+    '1900-01-01'
+);
+
+-- Insert 6
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    '70CF156E-BE17-4B35-B127-9F3892D32D46',
+    'aneyra@soaint.com',
+    1,
+    'UABhAHMAcwB3AG8AcgBkADEAIQA=',
+    'aneyra@soaint.com',
+    NULL,
+    0,
+    'Antony',
+    'Neyra',
+    'Hidalgo',
+    '2023-06-15'
+);
+
+-- Insert 7
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    '81557B10-8F72-49A3-A866-58526FBE3E3E',
+    'billy.fernandez_consultor@mdp.com.pe',
+    1,
+    'UABhAHMAcwB3AG8AcgBkADEAIQA=',
+    'billy.fernandez_consultor@mdp.com.pe',
+    NULL,
+    0,
+    'Billy George',
+    'Fernández',
+    'Quillay',
+    '2023-08-21'
+);
+
+-- Insert 8
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    'B1F5DE01-A60A-4A33-9EF9-8E43B5E20E3D',
+    'julioyanaricoc@pacifico.com.pe',
+    1,
+    'UABhAHMAcwB3AG8AcgBkADEAIQA=',
+    'julioyanaricoc@pacifico.com.pe',
+    NULL,
+    0,
+    'Julio Cesar',
+    'Yanarico',
+    'Cayo',
+    '2023-08-21'
+);
+
+-- Insert 9
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    'B9B789F6-D5B3-4671-B53F-BED967E13F3F',
+    'cristhian.gutarra@tivit.com',
+    1,
+    'UABhAHMAcwB3AG8AcgBkADEAIQA=',
+    'cristhian.gutarra@tivit.com',
+    NULL,
+    0,
+    'Cristhian',
+    'Gutarra',
+    'Leigh',
+    '2023-12-15'
+);
+
+-- Insert 10
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    'D81F9976-7E57-4F24-A884-4E614F750FB4',
+    'rmelendm@nttdata.com',
+    1,
+    'UABhAHMAcwB3AG8AcgBkADEAIQA=',
+    'rmelendm@nttdata.com',
+    NULL,
+    0,
+    'Ricardo Anthony',
+    'Melendres',
+    'Martel',
+    '2023-08-24'
+);
+
+-- Insert 11
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    'D99957BB-B94D-4DB2-8BED-1B4FC17C51A8',
+    'JoseRazuriO@pacifico.com.pe',
+    1,
+    'UABhAHMAcwB3AG8AcgBkADEAIQA=',
+    'JoseRazuriO@pacifico.com.pe',
+    NULL,
+    0,
+    'José Carlos',
+    'Razuri',
+    'Ozorio',
+    '2024-01-23'
+);
+
+-- Insert 12
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    'E598B608-5818-4566-B865-33C843E887A2',
+    'mflor@pacifico.com.pe',
+    1,
+    'UABhAHMAcwB3AG8AcgBkADEAIQA=',
+    'mflor@pacifico.com.pe',
+    NULL,
+    0,
+    'Mariana Milagros',
+    'Flor',
+    'Espinoza',
+    '2023-08-26'
+);
+
+-- Insert 13
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    'ED1D9E00-76ED-467C-94FE-2F817A9F4089',
+    'miguel.fernandez-gargurevich@inetum.com',
+    1,
+    'YQBzAGQAYQBzAGQA',
+    'miguel.fernandez-gargurevich@inetum.com',
+    NULL,
+    0,
+    'Miguel',
+    'Fernandez',
+    'Gargurevich',
+    '1981-06-25'
+);
+
+-- Insert 14
+INSERT INTO AspNetUsers (
+    Id,
+    Email,
+    EmailConfirmed,
+    PasswordHash,
+    UserName,
+    PhoneNumber,
+    PhoneNumberConfirmed,
+    Nombres,
+    ApellidoPaterno,
+    ApellidoMaterno,
+    FechaNacimiento
+) VALUES (
+    'F789CE1D-4279-47D5-83B9-13F21E6CDBAE',
+    'harry.huanilo@mdp.com.pe',
+    1,
+    'UABhAHMAcwB3AG8AcgBkADEAIQA=',
+    'harry.huanilo@mdp.com.pe',
+    NULL,
+    0,
+    'Harry Maiker',
+    'Huanilo',
+    'Mori',
+    '2023-09-10'
+);

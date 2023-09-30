@@ -1,31 +1,9 @@
 ﻿
 using AgileProject.Entidades;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using AgileProject.Repository.Contratos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
-using System.Text;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Data.SqlClient;
-using System.Data.Common;
 using System.Data;
-using AgileProject.Models;
-using Microsoft.AspNetCore.Mvc.Formatters;
-//using Microsoft.AspNetCore.Identity;
-using Microsoft.VisualBasic;
-using AgileProject.Model;
-using System.Collections;
-//using System.Globalization;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using AgileProject.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.PortableExecutable;
 using AutoMapper;
 //using System.Globalization;
 
@@ -289,16 +267,87 @@ namespace AgileProject.Repository.Implementaciones
             return list;
 
         }
-
         public async Task<AspNetUsers> PostUserUpdAsync(AspNetUsers userBE)
+        {
+            AspNetUsers updatedUser = null;
+
+            try
+            {
+                using (var _myContext = _context)
+                {
+                    // Busca el usuario por UserName en la base de datos.
+                    AspNetUsers existingUser = await _myContext.AspNetUsers
+                        .Where(x => x.UserName.Equals(userBE.UserName))
+                        .FirstOrDefaultAsync();
+
+                    if (existingUser != null)
+                    {
+                        // Actualiza las propiedades relevantes del usuario.
+                        existingUser.Nombres = userBE.Nombres;
+                        existingUser.ApellidoPaterno = userBE.ApellidoPaterno;
+                        existingUser.ApellidoMaterno = userBE.ApellidoMaterno;
+                        existingUser.UserName = userBE.UserName;
+                        existingUser.Email = userBE.Email;
+                        existingUser.EmailConfirmed = userBE.EmailConfirmed;
+                        //existingUser.PasswordHash = userBE.PasswordHash;
+                        existingUser.PhoneNumber = userBE.PhoneNumber;
+                        existingUser.PhoneNumberConfirmed = userBE.PhoneNumberConfirmed;
+                        existingUser.FechaNacimiento = userBE.FechaNacimiento;
+
+                        // Marca la entidad como modificada y guarda los cambios.
+                        _myContext.Entry(existingUser).State = EntityState.Modified;
+                        await _myContext.SaveChangesAsync();
+
+                        // Devuelve el usuario actualizado.
+                        updatedUser = existingUser;
+                    }
+                    else
+                    {
+                        // Maneja el caso en el que el usuario no se encuentra en la base de datos.
+                        // Esto podría incluir lanzar una excepción o realizar otra acción según tus necesidades.
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                CapturarError(e);
+            }
+
+            return updatedUser;
+        }
+
+        public async Task<AspNetUsers> PostUserUpdAsync2(AspNetUsers userBE)
         {
             AspNetUsers list = new AspNetUsers();
 
             try
             {
-                _ = _context.AspNetUsers.Update(userBE);
-                _ = await _context.SaveChangesAsync();
-                list.Id = userBE.Id;
+                //_ = _context.AspNetUsers.Update(userBE);
+                //_ = await _context.SaveChangesAsync();
+                //list.Id = userBE.Id;
+
+
+                using (var _myContext = _context)
+                {
+                    // Realiza tus operaciones de lectura y escritura aquí.
+                    AspNetUsers _userdb = await _myContext.AspNetUsers.Where(x => x.UserName.Equals(userBE.UserName)).FirstOrDefaultAsync();
+                    if (_userdb != null)
+                    {
+                        userBE.PasswordHash = _userdb.PasswordHash;
+                        _ = _myContext.AspNetUsers.Update(userBE);
+                        _ = await _myContext.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        // Manejar el caso en el que el usuario no se encuentra en la base de datos.
+                        // Puedes lanzar una excepción o manejarlo de otra manera según tus necesidades.
+                    }
+
+                    // Devuelve el usuario actualizado si se encontró en la base de datos.
+                    list = _userdb;
+                }
+
+
 
             }
             catch (Exception e)
@@ -585,15 +634,46 @@ namespace AgileProject.Repository.Implementaciones
         {
             try
             {
-                // 1. Recuperar el usuario de la base de datos.
+                //1.Recuperar el usuario de la base de datos.
                 //var userdb = await _context.AspNetUsers.SingleOrDefaultAsync(u => u.UserName == user.UserName);
 
-                // 3. Actualizar la contraseña con la nueva contraseña proporcionada por el usuario.
+                //3.Actualizar la contraseña con la nueva contraseña proporcionada por el usuario.
                 //userdb.PasswordHash = user.PasswordHash;
 
-                // 4. Guardar los cambios en la base de datos.
+                //4.Guardar los cambios en la base de datos.
                 _ = _context.Update(user);
                 _ = await _context.SaveChangesAsync();
+
+
+
+                //using (var _myContext = _context)
+                //{
+                //    // Busca el usuario por UserName en la base de datos.
+                //    AspNetUsers existingUser = await _myContext.AspNetUsers
+                //        .Where(x => x.UserName.Equals(user.UserName))
+                //        .FirstOrDefaultAsync();
+
+                //    if (existingUser != null)
+                //    {
+                //        // Actualiza las propiedades relevantes del usuario.
+
+                //        existingUser.PasswordHash = user.PasswordHash;
+
+                //        // Marca la entidad como modificada y guarda los cambios.
+                //        _myContext.Entry(existingUser).State = EntityState.Modified;
+                //        await _myContext.SaveChangesAsync();
+
+                //        // Devuelve el usuario actualizado.
+                //        //updatedUser = existingUser;
+                //    }
+                //    else
+                //    {
+                //        // Maneja el caso en el que el usuario no se encuentra en la base de datos.
+                //        // Esto podría incluir lanzar una excepción o realizar otra acción según tus necesidades.
+                //    }
+                //}
+
+
 
             }
             catch (Exception e)

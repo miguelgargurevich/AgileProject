@@ -203,15 +203,6 @@ namespace AgileProject.Controllers
                 IEnumerable<AspNetUsers> listUser = await _CalendarServices.GetUsersAsync(userName);
                 appUser = listUser.FirstOrDefault();
 
-                //appUser.Id = _userLogin.Id;
-                //appUser.Nombres = _userLogin.Nombres;
-                //appUser.ApellidoPaterno = _userLogin.ApellidoPaterno;
-                //appUser.ApellidoMaterno = _userLogin.ApellidoMaterno;
-                //appUser.PhoneNumber = _userLogin.PhoneNumber;
-                //appUser.UserName = userName;
-                //appUser.Email = userName;
-
-
                 appUser.PasswordHash = passEncrypt;
 
                 var rpta = _CalendarServices.ChangePassword(appUser);
